@@ -247,7 +247,9 @@ function showProjectDD() : void {
     }
     if(projectNameinjSON != undefined){
         projectNameinjSON.forEach(element => {
-            projectSelectElement.innerHTML += `<option value='${element.pNames}'>${element.pNames}</option>`;
+            if (projectSelectElement != null) {
+                projectSelectElement.innerHTML += `<option value='${element.pNames}'>${element.pNames}</option>`;
+            }
         });   
     }
  

@@ -144,7 +144,6 @@ function validation(): boolean {
 }
 
 
-
 document.getElementById("loginSubmitBtn")?.addEventListener("click", () => {
 
     let idElement: any = document.getElementById("userid")
@@ -164,7 +163,7 @@ document.getElementById("loginSubmitBtn")?.addEventListener("click", () => {
         let adminClass = new admin()
         if (adminClass.id == idValue) {
             let baseUrl: string = location.origin;
-            let newUrl: string = baseUrl + "admin.html"
+            let newUrl: string = baseUrl + "/admin.html"
             location.assign(newUrl)
         }
     }

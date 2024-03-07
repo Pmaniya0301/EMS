@@ -34,34 +34,47 @@ export class admin implements person {
 function showTable(): void {
     let tbodyElement: any = document.getElementById("leaveTableTbody");
     let leavedata: string | null = localStorage.getItem("leavedata");
-    let localdatainjSON: any;
+    let leavedatainjSON: any;
     if (leavedata != null) {
-        localdatainjSON = JSON.parse(leavedata);
-        console.log("sgszgkjaw tabel", typeof localdatainjSON);
+        leavedatainjSON = JSON.parse(leavedata);
+        console.log("sgszgkjaw tabel", typeof leavedatainjSON);
     }
 
-    localdatainjSON.sort()
+    if (leavedatainjSON != undefined) {
+        leavedatainjSON.sort(function(a, b) {
+            return a[1] - b[1];
+        })
+    }
 
+   if (tbodyElement != null) {
     tbodyElement.innerHTML = ``;
-    localdatainjSON.forEach(allLeave => {
+   }
+
+   if (leavedatainjSON != undefined) {
+    leavedatainjSON.forEach(allLeave => {
         
 
-            let toDateComparison = new Date(allLeave.to)
-            let curruntDate = new Date();
-            curruntDate.setHours(0);
-            curruntDate.setMinutes(0);
-            curruntDate.setSeconds(0);
-            curruntDate.setMilliseconds(0);
-            console.log(toDateComparison, curruntDate);
+        let toDateComparison = new Date(allLeave.to)
+        let curruntDate = new Date();
+        curruntDate.setHours(0);
+        curruntDate.setMinutes(0);
+        curruntDate.setSeconds(0);
+        curruntDate.setMilliseconds(0);
+        console.log(toDateComparison, curruntDate);
 
-            if (toDateComparison.getTime() > curruntDate.getTime()) {
-                tbodyElement.innerHTML += `<tr><td>${allLeave.type}</td><td>${allLeave.from}</td>
-            <td>${allLeave.to}</td><td>${status[allLeave.status]}</td></tr>`
+        if (toDateComparison.getTime() > curruntDate.getTime()) {
+            if (tbodyElement != null) {
+                tbodyElement.innerHTML += `<tr><td>${allLeave.id}</td><td>${allLeave.type}</td><td>${allLeave.from}</td>
+        <td>${allLeave.to}</td><td>${status[allLeave.status]}</td></tr>`
             }
+        }
 
-        
-    });
+    
+});
+   }
+    
 }
+showTable()
 
 var projectNameObject: {pNames : string} = {pNames: "Training"};
 
