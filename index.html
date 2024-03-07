@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .hide {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p id="loginTab">Log In</p>
+  <p id="signupTab">Sign Up</p>
+
+  <form id="loginForm">
+    <label for="user">Select Role: </label>
+    <select name="user" id="userRole">
+      <option value="Employee">Employee</option>
+      <option value="Admin">Admin</option>
+    </select><br>
+
+    <label for="id">Enter Id :</label>
+    <input type="number" name="id" id="userid" required>
+    <span id="id_error"></span><br>
+
+    <button type="button" id="loginSubmitBtn">Submit</button>
+  </form>
+
+
+  <form id="signupForm">
+    <span id="signupTitle">Signup As Employee</span><br>
+
+    <label for="name">Name: </label>
+    <input type="text" name="Name" id="name">
+    <span id="name_error"></span><br>
+
+    <label for="email">Email: </label>
+    <input type="text" name="email" id="email">
+    <span id="email_error"></span><br>
+
+    <label for="gender">Gender: </label>
+    <input type="radio" name="gender" id="Male" value="Male" checked>
+    <label for="gender">Male</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="gender" id="Female" value="Female">
+    <label for="gender">Female</label><br>
+
+    <label for="dob">DOB: </label>
+    <input type="date" name="dob" id="dob">
+    <span id="date_error"></span><br>
+
+    <label for="address">Address: </label>
+    <textarea name="address" id="address" cols="30" rows="2"></textarea>
+    <span id="address_error"></span><br>
+
+    <button type="button" id="signupSubmitBtn">Submit</button>
+  </form>
+
+</body>
+
+<script type="module" src="./logInSignUp.ts"></script>
+
+</html>
