@@ -15,7 +15,7 @@ document.getElementById("signupTab")?.addEventListener("click", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("signupForm")?.classList.add("hide");
-    document.getElementById("signupForm")?.classList.add("show");
+    // document.getElementById("signupForm")?.classList.add("show");
 
 })
 

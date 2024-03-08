@@ -42,62 +42,53 @@ export class Employee implements person {
 
 }
 
-let leaveModule:any = document.getElementById("leaveModule")
-let dailyWorkModule :any = document.getElementById("dailyWorkModule")
-let eventModule :any = document.getElementById("eventModule")
-let dashboardModule :any = document.getElementById("dashboardModule")
+let leaveModule: any = document.getElementById("leaveModule")
+let dailyWorkModule: any = document.getElementById("dailyWorkModule")
+let eventModule: any = document.getElementById("eventModule")
+let dashboardModule: any = document.getElementById("dashboardModule")
 
-// document.addEventListener("DOMContentLoaded", () => {
-    // leaveModule.style.display = "block"
-    // dailyWorkModule.style.display = "none"
-    // eventModule.style.display = "none"
-    // dashboardModule.style.display = "none"
-// });
 let employee = new Employee()
 
-document.addEventListener("load", () => {
-    leaveModule.style.display = "block"
-    dailyWorkModule.style.display = "none"
-    eventModule.style.display = "none"
-    dashboardModule.style.display = "none"
+if (leaveModule != null && dailyWorkModule != null && eventModule != null && dashboardModule != null) {
+    document.addEventListener("DOMContentLoaded", () => {
+        leaveModule.style.display = "block"
+        dailyWorkModule.style.display = "none"
+        eventModule.style.display = "none"
+        dashboardModule.style.display = "none"
 
-    let welcomeMsg: any = document.getElementById("welcomeMsg")
-welcomeMsg.innerHTML = `Howdy, ${employee.name}`;
-})
+        let welcomeMsg: any = document.getElementById("welcomeMsg")
+        welcomeMsg.innerHTML = `Howdy, ${employee.name}`;
+    })
 
-document.getElementById("leaveBtn")?.addEventListener("click", ()=> {
-    leaveModule.style.display = "block"
-    dailyWorkModule.style.display = "none"
-    eventModule.style.display = "none"
-    dashboardModule.style.display = "none"
-})
+    document.getElementById("leaveBtn")?.addEventListener("click", () => {
+        leaveModule.style.display = "block"
+        dailyWorkModule.style.display = "none"
+        eventModule.style.display = "none"
+        dashboardModule.style.display = "none"
+    })
 
-document.getElementById("workBtn")?.addEventListener("click", ()=> {
-    leaveModule.style.display = "none"
-    dailyWorkModule.style.display = "block"
-    eventModule.style.display = "none"
-    dashboardModule.style.display = "none"
-})
-document.getElementById("eventBtn")?.addEventListener("click", ()=> {
-    leaveModule.style.display = "none"
-    dailyWorkModule.style.display = "none"
-    eventModule.style.display = "block"
-    dashboardModule.style.display = "none"
-})
-document.getElementById("dashboardBtn")?.addEventListener("click", ()=> {
-    leaveModule.style.display = "none"
-    dailyWorkModule.style.display = "none"
-    eventModule.style.display = "none"
-    dashboardModule.style.display = "block"
-})
+    document.getElementById("workBtn")?.addEventListener("click", () => {
+        leaveModule.style.display = "none"
+        dailyWorkModule.style.display = "block"
+        eventModule.style.display = "none"
+        dashboardModule.style.display = "none"
+    })
+    document.getElementById("eventBtn")?.addEventListener("click", () => {
+        leaveModule.style.display = "none"
+        dailyWorkModule.style.display = "none"
+        eventModule.style.display = "block"
+        dashboardModule.style.display = "none"
+    })
+    document.getElementById("dashboardBtn")?.addEventListener("click", () => {
+        leaveModule.style.display = "none"
+        dailyWorkModule.style.display = "none"
+        eventModule.style.display = "none"
+        dashboardModule.style.display = "block"
+    })
 
+}
 
 console.log(employee.id, employee.name, employee.email, employee.gender, employee.dob, employee.age, employee.address);
-
-
-
-// let fromDateError: any = document.getElementById("fromDate_error")
-// fromDateError.innerHTML = "Invalid Date Format or Date is Empty";
 
 
 document.getElementById("leaveSubmitBtn")?.addEventListener("click", () => {
@@ -110,7 +101,6 @@ document.getElementById("leaveSubmitBtn")?.addEventListener("click", () => {
     let toDateElement: any = document.getElementById("toDate")
     let toDateValue: Date = toDateElement.value
 
-    // let dateParts: string[] = dobValue.split("-");
     let fromDate: Date = new Date(fromDateValue);
     fromDate.setHours(0)
     fromDate.setMinutes(0)
@@ -209,12 +199,14 @@ function showTable(): void {
     if (tbodyElement != null) {
         tbodyElement.innerHTML = ``;
     }
-    // tbodyElement.innerHTML = ``;
 
     if (localdatainjSON != undefined) {
         localdatainjSON.forEach(allLeave => {
             if (employee.id == allLeave.id) {
-    
+
+                let fromDatePrint = new Date(allLeave.from)
+                let toDatePrint = new Date(allLeave.to)
+
                 let toDateComparison = new Date(allLeave.to)
                 let curruntDate = new Date();
                 curruntDate.setHours(0);
@@ -222,37 +214,38 @@ function showTable(): void {
                 curruntDate.setSeconds(0);
                 curruntDate.setMilliseconds(0);
                 console.log(toDateComparison, curruntDate);
-    
+
                 if (toDateComparison.getTime() > curruntDate.getTime()) {
-                    tbodyElement.innerHTML += `<tr><td>${allLeave.type}</td><td>${allLeave.from}</td>
-                <td>${allLeave.to}</td><td>${status[allLeave.status]}</td></tr>`
+                    tbodyElement.innerHTML += `<tr><td>${allLeave.type}</td>
+                    <td>${fromDatePrint.getFullYear()}-${(fromDatePrint.getMonth() + 1)}-${fromDatePrint.getDate()}</td>
+                <td>${toDatePrint.getFullYear()}-${(toDatePrint.getMonth() + 1)}-${toDatePrint.getDate()}</td><td>${status[allLeave.status]}</td></tr>`
                 }
-    
+
             }
         });
     }
 
-    
+
 }
 
-function showProjectDD() : void {
+function showProjectDD(): void {
     let projectSelectElement: any = document.getElementById("selectProject");
 
-    let projectName: string | null = localStorage.getItem("peojectName");
+    let projectName: string | null = localStorage.getItem("projectName");
     console.log(projectName);
-    
+
     let projectNameinjSON;
     if (projectName != null) {
         projectNameinjSON = JSON.parse(projectName);
     }
-    if(projectNameinjSON != undefined){
+    if (projectNameinjSON != undefined) {
         projectNameinjSON.forEach(element => {
             if (projectSelectElement != null) {
                 projectSelectElement.innerHTML += `<option value='${element.pNames}'>${element.pNames}</option>`;
             }
-        });   
+        });
     }
- 
+
 }
 
 document.getElementById("workSubmitBtn")?.addEventListener("click", () => {
@@ -326,9 +319,9 @@ function showWorkTable(): void {
         console.log("sgszgkjaw auguisd", typeof workdatainjSON);
     }
 
-        if (tbodyElement != null) {
-            tbodyElement.innerHTML = ``;
-        }
+    if (tbodyElement != null) {
+        tbodyElement.innerHTML = ``;
+    }
 
     if (workdatainjSON != undefined) {
         workdatainjSON.forEach(allWork => {
@@ -338,11 +331,65 @@ function showWorkTable(): void {
             }
         });
     }
-    
+
 }
+
+function showEventTable(): void {
+    let tbodyElement: any = document.getElementById("eventTbody");
+    let eventdata: string | null = localStorage.getItem("eventdata");
+    let eventdatainjSON: any;
+    if (eventdata != null) {
+        eventdatainjSON = JSON.parse(eventdata);
+    }
+
+    if (tbodyElement != null) {
+        tbodyElement.innerHTML = ``;
+    }
+
+    if (eventdatainjSON != undefined) {
+        eventdatainjSON.forEach(event => {
+            if (tbodyElement != null) {
+
+                tbodyElement.innerHTML += `<tr><td>${event.eventDate}</td><td>${event.eventName}</td></tr>`
+            }
+        })
+    }
+}
+showEventTable()
 
 showProjectDD()
 
 showWorkTable()
 
 showTable();
+
+function showUserDashboard(): void {
+    let idElement: any = document.getElementById("id")
+    let nameElement: any = document.getElementById("name");
+    let emailElement: any = document.getElementById("email");
+    let genderElement: any = document.getElementById("gender");
+    let dobElement: any = document.getElementById("dob");
+    let ageElement: any = document.getElementById("age");
+    let addressElement: any = document.getElementById("address");
+
+    let localdata: string | null = localStorage.getItem("localdata");
+    let localdatainjSON: any;
+    if (localdata != null) {
+        localdatainjSON = JSON.parse(localdata);
+    }
+
+    localdatainjSON.forEach(person => {
+        if (person.id == employee.id) {
+            idElement.innerHTML = `ID : ${person.id}`
+            nameElement.innerHTML = `Name : ${person.name}`
+            emailElement.innerHTML = `Email : ${person.email}`
+            genderElement.innerHTML = `Gender : ${person.gender}`
+            dobElement.innerHTML = `Date Of Birth : ${person.dob}`
+            ageElement.innerHTML = `Age : ${person.age}`
+            addressElement.innerHTML = `Address : ${person.address}`
+        }
+    });
+
+}
+
+showUserDashboard()
